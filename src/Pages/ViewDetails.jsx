@@ -4,13 +4,13 @@ import { useParams } from "react-router-dom";
 
 const ViewDetails = () => {
   const { id } = useParams();
-  console.log(id);
+//   console.log(id);
   const { users } = useSelector((state) => state.app);
   const singleUser = users.find((user) => user._id === id);
-  console.log(singleUser);
+//   console.log(singleUser);
   const { _id, name, email, phone } = singleUser;
   return (
-    <div className="w-1/2 mx-auto m-10 p-5">
+    <div className="w-3/4 mx-auto m-10 p-5 border border-blue-400  rounded-md">
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { allUsers } from "../features/usersSlice";
+import { allUsers, deleteUser } from "../features/usersSlice";
 
 const AllUsers = () => {
   const dispatch = useDispatch();
@@ -11,17 +11,13 @@ const AllUsers = () => {
     dispatch(allUsers());
   }, []);
 
-  console.log(users);
-  //   if (loading) {
-  //     return <progress className="progress w-56"></progress>;
-  //   }
   return (
-    <div className="w-3/4 mx-auto m-10 p-5">
-      <Link to={"/create-user"} className="btn btn-outline">
+    <div className="w-full md:w-3/4 mx-auto m-10 p-5 text-center">
+      <Link to={"/create-user"} className="btn btn-outline mx-auto">
         Add User
       </Link>
 
-      <div>
+      <div className="border border-blue-400 m-6 rounded-md p-5">
         {loading && <progress className="progress w-56"></progress>}
         {!loading && (
           <div className="overflow-x-auto">
@@ -41,11 +37,22 @@ const AllUsers = () => {
                     <th>{user._id}</th>
                     <td>{user.name}</td>
                     <td>
-                      <Link to={`/view-user/${user._id}`} className="btn btn-outline">View</Link>
-                      <Link to={`/update-user/${user._id}`} className="btn btn-outline btn-primary mx-5">
+                      <Link
+                        to={`/view-user/${user._id}`}
+                        className="btn btn-outline"
+                      >
+                        View
+                      </Link>
+                      <Link
+                        to={`/update-user/${user._id}`}
+                        className="btn btn-outline btn-primary mx-5"
+                      >
                         Edit
                       </Link>
-                      <Link className="btn btn-outline btn-secondary">
+                      <Link
+                        className="btn btn-outline btn-secondary"
+                        onClick={() => dispatch(deleteUser(user._id))}
+                      >
                         Delete
                       </Link>
                     </td>

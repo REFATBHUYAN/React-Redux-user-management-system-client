@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { updateUser } from "../features/usersSlice";
 
 const EditUser = () => {
-    const { id } = useParams();
-  console.log(id);
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { users } = useSelector((state) => state.app);
   const singleUser = users.find((user) => user._id === id);
-  console.log(singleUser);
-  const { _id, name, email, phone } = singleUser;
+
   const [updateUsers, setUpdateUsers] = useState(singleUser);
   const getUserData = (e) => {
     setUpdateUsers({ ...updateUsers, [e.target.name]: e.target.value });
@@ -16,12 +18,12 @@ const EditUser = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("users...", updateUsers);
-    // dispatch(createUser(users));
-    // navigate("/");
+    dispatch(updateUser(updateUsers));
+    navigate("/");
   };
-  console.log(updateUsers);
+
   return (
-    <div className="w-1/2 mx-auto p-5 m-10">
+    <div className="w-3/4 md:w-1/4 mx-auto p-5 m-10 border border-blue-400  rounded-md">
       <form onSubmit={handleSubmit}>
         <div className="form-control">
           <label className="label">
@@ -30,11 +32,10 @@ const EditUser = () => {
           <input
             type="text"
             name="name"
-            defaultValue={singleUser && singleUser.name}
+            defaultValue={singleUser && singleUser?.name}
             placeholder="Name"
             className="input input-bordered"
             onBlur={getUserData}
-            
           />
         </div>
         <div className="form-control">
@@ -44,11 +45,10 @@ const EditUser = () => {
           <input
             type="email"
             name="email"
-            defaultValue={singleUser && singleUser.email}
+            defaultValue={singleUser && singleUser?.email}
             placeholder="email"
             className="input input-bordered"
             onBlur={getUserData}
-           
           />
         </div>
         <div className="form-control">
@@ -58,7 +58,7 @@ const EditUser = () => {
           <input
             type="tel"
             name="phone"
-            defaultValue={singleUser && singleUser.phone}
+            defaultValue={singleUser && singleUser?.phone}
             placeholder="Phone"
             className="input input-bordered"
             onBlur={getUserData}

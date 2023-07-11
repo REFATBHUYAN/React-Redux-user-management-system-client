@@ -16,9 +16,9 @@ const CreateUser = () => {
     dispatch(createUser(users));
     navigate("/");
   };
-  console.log(users)
+
   return (
-    <div className="w-1/2 mx-auto p-5 m-10">
+    <div className="w-1/2 mx-auto p-5 m-10 border border-blue-400  rounded-md">
       <form onSubmit={handleSubmit}>
         <div className="form-control">
           <label className="label">

@@ -5,10 +5,12 @@ import AllUsers from '../Pages/AllUsers';
 import CreateUser from '../Pages/CreateUser';
 import ViewDetails from '../Pages/ViewDetails';
 import EditUser from '../Pages/EditUser';
+import ErrorPage from '../Pages/ErrorPage';
 
 const router = createBrowserRouter([
     {
       path: "/",
+      errorElement:<ErrorPage></ErrorPage>,
       element: <MainLayout></MainLayout>,
       children:[
         {
