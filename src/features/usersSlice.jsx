@@ -6,7 +6,7 @@ export const createUser = createAsyncThunk(
   "createUser",
   async (data, { rejectWithValue }) => {
     console.log("data", data);
-    const response = await fetch("http://localhost:5000/users", {
+    const response = await fetch("https://user-management-system-server-blush.vercel.app/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export const createUser = createAsyncThunk(
 export const allUsers = createAsyncThunk(
   "get all users",
   async (args, { rejectWithValue }) => {
-    const res = await fetch("http://localhost:5000/users");
+    const res = await fetch("https://user-management-system-server-blush.vercel.app/users");
     try {
       const result = await res.json();
       console.log(result);
@@ -45,7 +45,7 @@ export const updateUser = createAsyncThunk(
   "updateUser",
   async (data, { rejectWithValue }) => {
     console.log("updated user", data);
-    const response = await fetch(`http://localhost:5000/users/${data._id}`, {
+    const response = await fetch(`https://user-management-system-server-blush.vercel.app/users/${data._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -67,7 +67,7 @@ export const updateUser = createAsyncThunk(
 export const deleteUser = createAsyncThunk(
   "deleteUser",
   async (id, { rejectWithValue }) => {
-    const response = await fetch(`http://localhost:5000/users/${id}`, {
+    const response = await fetch(`https://user-management-system-server-blush.vercel.app/users/${id}`, {
       method: "DELETE",
     });
 
